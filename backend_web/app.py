@@ -22,15 +22,16 @@ conversation = [
     "Are you a machine learning engineer?",
     "Not, me but Wajeeh who designed me, is.",
     "Thanks",
-    "You're welcome!!!"
+    "You're welcome!!!",
 ]
 
-trainer.train([conversation])
+trainer.train(conversation)
 
 # standard training of the bot
 corpus_trainer = ChatterBotCorpusTrainer(standard_bot)
 corpus_trainer.train("chatterbot.corpus.english")
-
+corpus_trainer.train("chatterbot.corpus.english.greetings")
+corpus_trainer.train("chatterbot.corpus.english.conversations")
 
 # for the home '/'
 class Home(Resource):
@@ -47,10 +48,11 @@ class Chat(Resource):
         question = posted_data['question']
         app_trained_bot_answer = app_trained_bot.get_response(question)
         standard_bot_answer = standard_bot.get_response(question)
+        # type(standard_bot_answer)
         return jsonify({
             "status": 200,
-            "app trained bot replies": app_trained_bot_answer,
-            "standard bot answer": standard_bot_answer
+            "app trained bot replies": str(app_trained_bot_answer),
+            "standard bot replies": str(standard_bot_answer)
         })
 
 
