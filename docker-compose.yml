@@ -2,6 +2,6 @@ version: '3'
 
 services:
   web:
-    context: ./backend_web
+    build:  ./backend_web
     ports:
       - "5000:5000"
